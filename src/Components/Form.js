@@ -16,7 +16,6 @@ export const FormInput = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const result = dispatch(addCard(newItem));
-    console.log(result);
   };
   return (
     <Form className="bg-secondary" onSubmit={handleOnSubmit}>

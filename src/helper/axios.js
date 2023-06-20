@@ -13,3 +13,10 @@ export const getData = async () => {
   console.log(result);
   return data;
 };
+
+export const pushComment = async (item) => {
+  const result = await axios.patch(API, item);
+  const { data } = result;
+  console.log(data);
+  return data;
+};

@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { addData, getData } from "../helper/axios";
+import { addData, getData, pushComment } from "../helper/axios";
 import { addList } from "./reduxSlice";
 
 export const addCard = (item) => async (dispatch) => {
@@ -27,6 +27,24 @@ export const retrieveData = () => async (dispatch) => {
       dispatch(addList(list));
       console.log(list);
     }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const putComment = (item) => async (dispatch) => {
+  try {
+    const result = pushComment(item);
+    toast.promise(result, {
+      pending: "..pending",
+    });
+    const { status, informations } = await pushComment(item);
+
+    if (status === "success") {
+      toast[status](informations);
+      dispatch(retrieveData());
+    }
+    return status;
   } catch (error) {
     console.log(error.message);
   }
