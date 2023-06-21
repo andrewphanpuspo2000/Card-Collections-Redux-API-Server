@@ -1,6 +1,29 @@
 import { Button, Col, Form } from "react-bootstrap";
 import { FloatingLabel } from "react-bootstrap";
-export const ItemCard = ({ id, src, name, handleComment, submitComment }) => {
+
+import { Link } from "react-router-dom";
+import { addProd } from "../redux/taskAction";
+import { useDispatch } from "react-redux";
+export const ItemCard = ({
+  id,
+  src,
+  name,
+  handleComment,
+  submitComment,
+  comment,
+}) => {
+  const proInfo = {
+    _id: id,
+    url: src,
+    itemName: name,
+    comment: comment,
+  };
+  const dispatch = useDispatch();
+  const sendToProductPage = (item) => {
+    console.log("sendToProductPage is running");
+    const pushItem = dispatch(addProd(item));
+  };
+
   return (
     <Col md={3} className="card-wrapper">
       <div className="card-image-wrapper">
@@ -8,8 +31,9 @@ export const ItemCard = ({ id, src, name, handleComment, submitComment }) => {
       </div>
       <p>{name}</p>
       <Form
-        onSubmit={() => {
-          submitComment(id, this);
+        onSubmit={(e) => {
+          e.preventDefault();
+          submitComment(id);
         }}
       >
         <FloatingLabel
@@ -26,6 +50,20 @@ export const ItemCard = ({ id, src, name, handleComment, submitComment }) => {
         </FloatingLabel>
         <Button type="submit">Add Comment</Button>
       </Form>
+      <Link to="/product">
+        <Button
+          onClick={() => {
+            sendToProductPage(proInfo);
+          }}
+        >
+          to product
+        </Button>
+      </Link>
+      <ul>
+        {comment.map((item, i) => (
+          <li key={i}>{item}</li>
+        ))}
+      </ul>
     </Col>
   );
 };

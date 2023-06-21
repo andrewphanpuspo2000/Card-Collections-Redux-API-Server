@@ -6,11 +6,18 @@ import { useDispatch } from "react-redux";
 export const FormInput = () => {
   const [newItem, setNewItem] = useState({});
   const dispatch = useDispatch();
+  const [itemName, setItemName] = useState("");
+  const [url, setUrl] = useState("");
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setNewItem({ ...newItem, [name]: value });
     console.log(e.target);
+    if (name === "itemName") {
+      setItemName(value);
+    } else if (name === "url") {
+      setUrl(value);
+    }
   };
 
   const handleOnSubmit = async (e) => {
@@ -25,6 +32,7 @@ export const FormInput = () => {
             type="text"
             placeholder="Item name"
             name="itemName"
+            value={itemName}
             required
             onChange={handleOnChange}
           />
@@ -34,6 +42,7 @@ export const FormInput = () => {
             type="text"
             placeholder="URL"
             name="url"
+            value={url}
             required
             onChange={handleOnChange}
           />

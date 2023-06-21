@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Row } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { putComment, retrieveData } from "../redux/taskAction";
 import { ItemCard } from "./ItemCard";
+import { Link, Route, Routes } from "react-router-dom";
+import { Product } from "./Product";
 
 export const Item = () => {
   const dispatch = useDispatch();
@@ -16,10 +18,9 @@ export const Item = () => {
     setComment(value);
     console.log(comment);
   };
-  const submitComment = async (id, e) => {
-    // e.preventDefault();
+  const submitComment = async (id) => {
     const push = dispatch(putComment({ _id: id, comment: comment }));
-    if (push === "success") setComment("");
+    return;
   };
 
   useEffect(() => {
@@ -37,6 +38,7 @@ export const Item = () => {
               id={item._id}
               src={item.url}
               name={item.itemName}
+              comment={item.comment}
               handleComment={handleOnComment}
               submitComment={submitComment}
             />
