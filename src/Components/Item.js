@@ -30,7 +30,7 @@ export const Item = () => {
   return (
     <div>
       <h2 className="text-center">Cards</h2>
-      <Row>
+      <Row className="row-card">
         {items.length > 0 &&
           items.map((item, i) => (
             <ItemCard

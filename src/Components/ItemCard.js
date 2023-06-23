@@ -59,11 +59,7 @@ export const ItemCard = ({
           to product
         </Button>
       </Link>
-      <ul>
-        {comment.map((item, i) => (
-          <li key={i}>{item}</li>
-        ))}
-      </ul>
+      <p>{comment.length}</p>
     </Col>
   );
 };
